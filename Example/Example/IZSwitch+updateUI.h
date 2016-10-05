@@ -10,4 +10,7 @@
 
 @interface IZSwitch (updateUI)
 
+- (UIColor *)randomColor;
+- (void)updateSwitchUI;
+
 @end

@@ -136,7 +136,7 @@ static CGFloat const IZDefaultWidht = 72;
 
 - (UIColor *)onThumbColor {
     if (!_onThumbColor) {
-        return [UIColor greenColor];
+        return [UIColor blueColor];
     }
     return  _onThumbColor;
 }

@@ -9,10 +9,14 @@
 /* Begin PBXBuildFile section */
 		21DC5A8E1DA524DD00169B98 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DC5A8D1DA524DD00169B98 /* main.m */; };
 		21DC5A911DA524DD00169B98 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DC5A901DA524DD00169B98 /* AppDelegate.m */; };
-		21DC5A941DA524DD00169B98 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DC5A931DA524DD00169B98 /* ViewController.m */; };
+		21DC5A941DA524DD00169B98 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DC5A931DA524DD00169B98 /* MainViewController.m */; };
 		21DC5A971DA524DD00169B98 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21DC5A951DA524DD00169B98 /* Main.storyboard */; };
 		21DC5A991DA524DD00169B98 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21DC5A981DA524DD00169B98 /* Assets.xcassets */; };
 		21DC5A9C1DA524DD00169B98 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21DC5A9A1DA524DD00169B98 /* LaunchScreen.storyboard */; };
+		21DC5AA61DA5299800169B98 /* IZSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DC5AA51DA5299800169B98 /* IZSwitch.m */; };
+		21DC5AAA1DA52BB500169B98 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DC5AA91DA52BB500169B98 /* TableViewController.m */; };
+		21DC5AAE1DA52C2700169B98 /* IZSwitchesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DC5AAD1DA52C2700169B98 /* IZSwitchesCell.m */; };
+		21DC5AB21DA545A800169B98 /* IZSwitch+updateUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DC5AB11DA545A800169B98 /* IZSwitch+updateUI.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,12 +24,20 @@
 		21DC5A8D1DA524DD00169B98 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		21DC5A8F1DA524DD00169B98 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		21DC5A901DA524DD00169B98 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		21DC5A921DA524DD00169B98 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		21DC5A931DA524DD00169B98 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		21DC5A921DA524DD00169B98 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		21DC5A931DA524DD00169B98 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		21DC5A961DA524DD00169B98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		21DC5A981DA524DD00169B98 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		21DC5A9B1DA524DD00169B98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		21DC5A9D1DA524DD00169B98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21DC5AA41DA5299800169B98 /* IZSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IZSwitch.h; sourceTree = "<group>"; };
+		21DC5AA51DA5299800169B98 /* IZSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IZSwitch.m; sourceTree = "<group>"; };
+		21DC5AA81DA52BB500169B98 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		21DC5AA91DA52BB500169B98 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		21DC5AAC1DA52C2700169B98 /* IZSwitchesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IZSwitchesCell.h; sourceTree = "<group>"; };
+		21DC5AAD1DA52C2700169B98 /* IZSwitchesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IZSwitchesCell.m; sourceTree = "<group>"; };
+		21DC5AB01DA545A800169B98 /* IZSwitch+updateUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IZSwitch+updateUI.h"; sourceTree = "<group>"; };
+		21DC5AB11DA545A800169B98 /* IZSwitch+updateUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IZSwitch+updateUI.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +54,7 @@
 		21DC5A801DA524DC00169B98 = {
 			isa = PBXGroup;
 			children = (
+				21DC5AA31DA5299800169B98 /* Source */,
 				21DC5A8B1DA524DD00169B98 /* Example */,
 				21DC5A8A1DA524DD00169B98 /* Products */,
 			);
@@ -58,10 +71,10 @@
 		21DC5A8B1DA524DD00169B98 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				21DC5AAF1DA5458C00169B98 /* Catigories */,
+				21DC5AA71DA52B7000169B98 /* ViewControllers */,
 				21DC5A8F1DA524DD00169B98 /* AppDelegate.h */,
 				21DC5A901DA524DD00169B98 /* AppDelegate.m */,
-				21DC5A921DA524DD00169B98 /* ViewController.h */,
-				21DC5A931DA524DD00169B98 /* ViewController.m */,
 				21DC5A951DA524DD00169B98 /* Main.storyboard */,
 				21DC5A981DA524DD00169B98 /* Assets.xcassets */,
 				21DC5A9A1DA524DD00169B98 /* LaunchScreen.storyboard */,
@@ -77,6 +90,45 @@
 				21DC5A8D1DA524DD00169B98 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		21DC5AA31DA5299800169B98 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				21DC5AA41DA5299800169B98 /* IZSwitch.h */,
+				21DC5AA51DA5299800169B98 /* IZSwitch.m */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		21DC5AA71DA52B7000169B98 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				21DC5A921DA524DD00169B98 /* MainViewController.h */,
+				21DC5A931DA524DD00169B98 /* MainViewController.m */,
+				21DC5AA81DA52BB500169B98 /* TableViewController.h */,
+				21DC5AA91DA52BB500169B98 /* TableViewController.m */,
+				21DC5AAB1DA52C0700169B98 /* Cell */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		21DC5AAB1DA52C0700169B98 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				21DC5AAC1DA52C2700169B98 /* IZSwitchesCell.h */,
+				21DC5AAD1DA52C2700169B98 /* IZSwitchesCell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		21DC5AAF1DA5458C00169B98 /* Catigories */ = {
+			isa = PBXGroup;
+			children = (
+				21DC5AB01DA545A800169B98 /* IZSwitch+updateUI.h */,
+				21DC5AB11DA545A800169B98 /* IZSwitch+updateUI.m */,
+			);
+			name = Catigories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -110,6 +162,7 @@
 				TargetAttributes = {
 					21DC5A881DA524DC00169B98 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = RT92TJ3NKC;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -150,8 +203,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21DC5A941DA524DD00169B98 /* ViewController.m in Sources */,
+				21DC5AAE1DA52C2700169B98 /* IZSwitchesCell.m in Sources */,
+				21DC5A941DA524DD00169B98 /* MainViewController.m in Sources */,
 				21DC5A911DA524DD00169B98 /* AppDelegate.m in Sources */,
+				21DC5AB21DA545A800169B98 /* IZSwitch+updateUI.m in Sources */,
+				21DC5AA61DA5299800169B98 /* IZSwitch.m in Sources */,
+				21DC5AAA1DA52BB500169B98 /* TableViewController.m in Sources */,
 				21DC5A8E1DA524DD00169B98 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,10 +327,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = RT92TJ3NKC;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.inteza.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -281,10 +340,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = RT92TJ3NKC;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.inteza.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
