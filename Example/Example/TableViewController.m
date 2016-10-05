@@ -33,7 +33,6 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     IZSwitchesCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([IZSwitchesCell class])];
     return cell;
 }

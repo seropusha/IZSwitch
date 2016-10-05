@@ -40,6 +40,8 @@
     }];
 }
 
+#pragma mark - Private -
+
 - (void)barButtonAction:(UIBarButtonItem *)barButton {
     self.changeUI = !self.changeUI;
     NSString *titleForBarButton = self.isChangeUI ? @"OFF change colors" : @"ON change colors";
