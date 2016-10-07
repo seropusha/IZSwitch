@@ -61,7 +61,6 @@ static CGFloat const IZDefaultWidht = 72;
         self.thumbLayer = [CALayer layer];
 
         [self _setupUI];
-        [self setSwitchFrame:frame];
         [self _addLongPressGestoreRecognizer];
     }
     return self;
@@ -78,14 +77,12 @@ static CGFloat const IZDefaultWidht = 72;
     [self _addLongPressGestoreRecognizer];
 }
 
-#pragma mark - Setup -
-
-- (void)setSwitchFrame:(CGRect)frame {
+- (void)setFrame:(CGRect)frame {
     if (frame.size.width <= frame.size.height) {
         NSAssert(frame.size.width >= frame.size.height, @"IZSwitch widht must be more than height");
-        self.frame = CGRectMake(frame.origin.x, frame.origin.y, IZDefaultWidht, IZDefaultHeight);
+        [super setFrame:CGRectMake(frame.origin.x, frame.origin.y, IZDefaultWidht, IZDefaultHeight)];
     } else {
-        self.frame = frame;
+        [super setFrame:frame];
     }
     [self setNeedsDisplay];
 }
