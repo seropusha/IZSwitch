@@ -24,6 +24,4 @@ IB_DESIGNABLE
 @property (nonatomic) IBInspectable CGFloat borderWidht;
 @property (nonatomic) IBInspectable CGFloat edgeForBorderLine;
 
-- (void)setSwitchFrame:(CGRect)frame;
-
 @end

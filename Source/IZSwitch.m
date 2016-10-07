@@ -19,6 +19,9 @@ static CGFloat const IZDefaultWidht = 72;
 @property (strong, nonatomic) CALayer *backgroundLayer;
 @property (strong, nonatomic) CALayer *borderLayer;
 @property (strong, nonatomic) CALayer *thumbLayer;
+//Internal
+@property (nonatomic, getter=isFocusedState) BOOL focusedState;
+@property (nonatomic, getter=isChangeStateWithPan) BOOL changeStateWithPan;
 
 @end
 
@@ -58,7 +61,6 @@ static CGFloat const IZDefaultWidht = 72;
         self.thumbLayer = [CALayer layer];
 
         [self _setupUI];
-        [self setSwitchFrame:frame];
         [self _addLongPressGestoreRecognizer];
     }
     return self;
@@ -75,14 +77,12 @@ static CGFloat const IZDefaultWidht = 72;
     [self _addLongPressGestoreRecognizer];
 }
 
-#pragma mark - Setup -
-
-- (void)setSwitchFrame:(CGRect)frame {
+- (void)setFrame:(CGRect)frame {
     if (frame.size.width <= frame.size.height) {
         NSAssert(frame.size.width >= frame.size.height, @"IZSwitch widht must be more than height");
-        self.frame = CGRectMake(frame.origin.x, frame.origin.y, IZDefaultWidht, IZDefaultHeight);
+        [super setFrame:CGRectMake(frame.origin.x, frame.origin.y, IZDefaultWidht, IZDefaultHeight)];
     } else {
-        self.frame = frame;
+        [super setFrame:frame];
     }
     [self setNeedsDisplay];
 }
@@ -136,7 +136,7 @@ static CGFloat const IZDefaultWidht = 72;
 
 - (UIColor *)onThumbColor {
     if (!_onThumbColor) {
-        return [UIColor blueColor];
+        return [UIColor greenColor];
     }
     return  _onThumbColor;
 }
@@ -176,9 +176,38 @@ static CGFloat const IZDefaultWidht = 72;
         case UIGestureRecognizerStateBegan:
             [self _beganThumbAnimation];
             break;
+        case UIGestureRecognizerStateChanged:{
+            self.changeStateWithPan = YES;
+            CGPoint location = [recognizer locationInView:self];
+            if (location.x <= 0) {
+                self.focusedState = NO;
+                
+                self.backgroundLayer.backgroundColor = self.offBackgroundColor.CGColor;
+                self.thumbLayer.backgroundColor = self.offThumbColor.CGColor;
+                
+                CGRect frameForFousedOFF = self.thumbLayer.frame;
+                frameForFousedOFF.origin.x = [self _thumbXNonFocusedPositionWithState:self.focusedState];
+                [self _animationLayer:self.thumbLayer duration:0.25 toFrame:frameForFousedOFF];
+            } else if (location.x >= self.bounds.size.width) {
+                self.focusedState = YES;
+                
+                self.backgroundLayer.backgroundColor = self.onBackgroundColor.CGColor;
+                self.thumbLayer.backgroundColor = self.onThumbColor.CGColor;
+                
+                CGRect frameForFousedON = self.thumbLayer.frame;
+                frameForFousedON.origin.x = [self _thumbXNonFocusedPositionWithState:self.focusedState] - [self _additionalFocusWidht];
+                [self _animationLayer:self.thumbLayer duration:0.25 toFrame:frameForFousedON];
+            }
+        }
+            break;
         case  UIGestureRecognizerStateEnded: {
-            self.on = !self.on;
-            [self _endThumbAnimation];
+            if (self.changeStateWithPan) {
+                self.on = self.focusedState;
+            } else {
+                self.on = !self.isOn;
+            }
+            
+            self.changeStateWithPan = NO;
             [self sendActionsForControlEvents:UIControlEventValueChanged];
         }
             break;
@@ -210,11 +239,9 @@ static CGFloat const IZDefaultWidht = 72;
     CGRect backgrandLayerFrame = CGRectMake(originXBacgrndLayer, originYBacgrndLayer, widhtBackgrndLayer, heightBackgrndLayer);
     self.backgroundLayer.frame = backgrandLayerFrame;
     
-    CGFloat sideThumbValue = [self _originalWidhtThumb];
-    CGFloat originXForOnState = self.bounds.size.width - self.thumbEdgeOffset - self.borderWidht - self.edgeForBorderLine - sideThumbValue;
-    CGFloat originX = !self.isOn ? self.backgroundLayer.frame.origin.x + self.thumbEdgeOffset : originXForOnState;
+    CGFloat originX = [self _thumbXNonFocusedPositionWithState:self.isOn];
     CGFloat originY =  self.backgroundLayer.frame.origin.y + self.thumbEdgeOffset;
-    self.thumbLayer.frame = CGRectMake(originX, originY, sideThumbValue, sideThumbValue);
+    self.thumbLayer.frame = CGRectMake(originX, originY, [self _thumbWidht], [self _thumbWidht]);
     
     self.backgroundLayer.cornerRadius = self.backgroundLayer.frame.size.height / 2;
     self.borderLayer.cornerRadius = self.borderLayer.frame.size.height / 2;
@@ -255,27 +282,11 @@ static CGFloat const IZDefaultWidht = 72;
     
     CGPoint origin = self.thumbLayer.frame.origin;
     CGSize size = self.thumbLayer.frame.size;
-    
-    CGFloat focusWidht = size.width * IZChangeWidhtInDegrees;
-    CGFloat bacgrndLayerWidht = self.backgroundLayer.frame.size.width;
-    
-    CGFloat maxThumbWidht = bacgrndLayerWidht - [self _originalWidhtThumb] - (self.thumbEdgeOffset*2);
-    CGFloat additionalFocusWidht = size.width + focusWidht >= bacgrndLayerWidht ? maxThumbWidht : focusWidht;
-    
-    CGFloat originXForOnState = self.bounds.size.width - self.thumbEdgeOffset - self.borderWidht - self.edgeForBorderLine - [self _originalWidhtThumb];
-    CGFloat originX = !self.isOn ? self.backgroundLayer.frame.origin.x + self.thumbEdgeOffset : originXForOnState - additionalFocusWidht;
-    CGRect frameToMove = CGRectMake(originX, origin.y, size.width + additionalFocusWidht, size.height);
-    [self _animationLayer:self.thumbLayer duration:1 toFrame:frameToMove];
-}
 
-- (void)_endThumbAnimation {
-    CGPoint origin = self.thumbLayer.frame.origin;
-    CGSize size = self.thumbLayer.frame.size;
-    
-    CGFloat originXForOnState = self.bounds.size.width - self.thumbEdgeOffset - self.borderWidht - self.edgeForBorderLine - [self _originalWidhtThumb];
-    CGFloat originX = !self.isOn ? self.backgroundLayer.frame.origin.x + self.thumbEdgeOffset : originXForOnState;
-    CGRect newPosition = CGRectMake(originX, origin.y, [self _originalWidhtThumb], size.height);
-    [self _animationLayer:self.thumbLayer duration:0.25 toFrame:newPosition];
+    CGFloat originX = self.isOn ? [self _thumbXNonFocusedPositionWithState:self.isOn] - [self _additionalFocusWidht] : [self _thumbXNonFocusedPositionWithState:self.isOn];
+    CGFloat thumbFocusedWidht = [self _thumbWidht] + [self _additionalFocusWidht];
+    CGRect frameToMove = CGRectMake(originX, origin.y, thumbFocusedWidht, size.height);
+    [self _animationLayer:self.thumbLayer duration:1 toFrame:frameToMove];
 }
 
 - (void)_animationLayer:(CALayer *)layer duration:(NSTimeInterval)duration toFrame:(CGRect)frame {
@@ -287,8 +298,22 @@ static CGFloat const IZDefaultWidht = 72;
     [CATransaction commit];
 }
 
-- (CGFloat)_originalWidhtThumb {
-    return self.backgroundLayer.frame.size.height - self.thumbEdgeOffset * 2;  //becouse thumb is rectangle
+- (CGFloat)_thumbXNonFocusedPositionWithState:(BOOL)state {
+    CGFloat offStateX = self.backgroundLayer.frame.origin.x + self.thumbEdgeOffset;
+    CGFloat onStateX = self.bounds.size.width - self.thumbEdgeOffset - self.borderWidht - self.edgeForBorderLine - [self _thumbWidht];
+    return state ? onStateX : offStateX;
+}
+
+- (CGFloat)_thumbWidht {
+    return self.backgroundLayer.bounds.size.height - self.thumbEdgeOffset * 2;
+}
+
+- (CGFloat)_additionalFocusWidht {
+    return [self _thumbWidht] * IZChangeWidhtInDegrees;
+}
+
+- (CGFloat)_availableThumbWidht {
+    return self.backgroundLayer.bounds.size.width - self.thumbEdgeOffset * 2;
 }
 
 #pragma mark - DEBUG -
