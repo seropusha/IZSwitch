@@ -1,0 +1,14 @@
+//
+//  PrefixHeader.pch
+//  Example
+//
+//  Created by Сергей Навка on 10/6/16.
+//  Copyright © 2016 Сергей. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import <Foundation/Foundation.h>
+
+#endif /* PrefixHeader_pch */
