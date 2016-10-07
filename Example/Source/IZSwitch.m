@@ -19,8 +19,9 @@ static CGFloat const IZDefaultWidht = 72;
 @property (strong, nonatomic) CALayer *backgroundLayer;
 @property (strong, nonatomic) CALayer *borderLayer;
 @property (strong, nonatomic) CALayer *thumbLayer;
-
+//Internal
 @property (nonatomic, getter=isFocusedState) BOOL focusedState;
+@property (nonatomic, getter=isChangeStateWithPan) BOOL changeStateWithPan;
 
 @end
 
@@ -179,14 +180,23 @@ static CGFloat const IZDefaultWidht = 72;
             [self _beganThumbAnimation];
             break;
         case UIGestureRecognizerStateChanged:{
+            self.changeStateWithPan = YES;
             CGPoint location = [recognizer locationInView:self];
             if (location.x <= 0) {
                 self.focusedState = NO;
+                
+                self.backgroundLayer.backgroundColor = self.offBackgroundColor.CGColor;
+                self.thumbLayer.backgroundColor = self.offThumbColor.CGColor;
+                
                 CGRect frameForFousedOFF = self.thumbLayer.frame;
                 frameForFousedOFF.origin.x = [self _thumbXNonFocusedPositionWithState:self.focusedState];
                 [self _animationLayer:self.thumbLayer duration:0.25 toFrame:frameForFousedOFF];
             } else if (location.x >= self.bounds.size.width) {
                 self.focusedState = YES;
+                
+                self.backgroundLayer.backgroundColor = self.onBackgroundColor.CGColor;
+                self.thumbLayer.backgroundColor = self.onThumbColor.CGColor;
+                
                 CGRect frameForFousedON = self.thumbLayer.frame;
                 frameForFousedON.origin.x = [self _thumbXNonFocusedPositionWithState:self.focusedState] - [self _additionalFocusWidht];
                 [self _animationLayer:self.thumbLayer duration:0.25 toFrame:frameForFousedON];
@@ -194,7 +204,13 @@ static CGFloat const IZDefaultWidht = 72;
         }
             break;
         case  UIGestureRecognizerStateEnded: {
-            self.on = self.focusedState;
+            if (self.changeStateWithPan) {
+                self.on = self.focusedState;
+            } else {
+                self.on = !self.isOn;
+            }
+            
+            self.changeStateWithPan = NO;
             [self sendActionsForControlEvents:UIControlEventValueChanged];
         }
             break;
